@@ -11,11 +11,7 @@ class Beer < ApplicationRecord
 
     def print_rating
       num_ratings = self.ratings.count
-      if num_ratings == 1
-        "Beer has #{self.ratings.count} rating with a score of #{self.average_rating}"
-      else 
-        "Beer has #{self.ratings.count} ratings with an average of #{self.average_rating}"
-      end
+      "Beer has #{num_ratings} #{'rating'.pluralize(num_ratings)} with an average of #{self.average_rating}"
     end
      
 end
