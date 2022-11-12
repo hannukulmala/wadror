@@ -13,5 +13,9 @@ class Beer < ApplicationRecord
       num_ratings = self.ratings.count
       "Beer has #{num_ratings} #{'rating'.pluralize(num_ratings)} with an average of #{self.average_rating}"
     end
+    
+    def to_s
+      "#{self.name}, #{self.brewery.name}"
+    end
      
 end
