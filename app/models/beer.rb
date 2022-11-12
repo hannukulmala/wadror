@@ -3,9 +3,10 @@ class Beer < ApplicationRecord
     has_many :ratings
 
     def average_rating
-       sum = self.ratings.reduce (0) {|sum,element| sum + element.score}
-       count = self.ratings.count
-       (sum / count).to_f
+      #self.ratings.average(:score).to_f
+      sum = self.ratings.reduce (0) {|sum,element| sum + element.score}
+      count = self.ratings.count
+      (sum / count).to_f
     end
 
     def print_rating
