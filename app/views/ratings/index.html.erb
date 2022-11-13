@@ -2,7 +2,7 @@
 
 <ul>
  <% @ratings.each do |rating| %>
-   <li> <%= rating %> </li>
+   <li> <%= render rating %> <%= button_to 'delete', rating_path(rating.id), method: :delete %></li>
  <% end %>
 </ul>
- <p><%= link_to "Add a new rating", ratings_new_path %></p>
+ <p><%= link_to "Add a new rating", new_rating_path %></p>
