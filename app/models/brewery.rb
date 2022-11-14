@@ -1,4 +1,6 @@
 class Brewery < ApplicationRecord
+    include  RatingAverage
+
     has_many :beers, dependent: :destroy
     has_many :ratings, through: :beers
 
@@ -11,7 +13,7 @@ class Brewery < ApplicationRecord
     def print_rating
       res =  "Brewery has #{self.ratings.count} #{'rating'.pluralize(self.ratings.count)}"
       if self.ratings.count > 0
-        res += " with an average of #{self.average_rating}" 
+        res += " with an average of #{average_rating}" 
       end
       return res
     end
@@ -19,10 +21,6 @@ class Brewery < ApplicationRecord
     def restart
       self.year = 2022
       puts "changed year to #{year}"
-    end
-
-    def average_rating
-      self.ratings.average(:score)
     end
 
 end

@@ -3,6 +3,7 @@
 <%= render @brewery %>
 
 <div>
+  <p><%= @brewery.print_rating %></p>
   <%= link_to "Edit this brewery", edit_brewery_path(@brewery) %> |
   <%= link_to "Back to breweries", breweries_path %>
 
