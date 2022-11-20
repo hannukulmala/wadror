@@ -3,4 +3,5 @@
 <%= form_with url: session_path, method: :post do |form| %>
   <%= form.text_field :username %>
   <%= form.submit "Log in" %>
+  <p style="color: red"><%= notice %></p>
 <% end %>
