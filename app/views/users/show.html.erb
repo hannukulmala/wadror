@@ -2,6 +2,15 @@
 
 <h3>Username:</h3>
 <p><%= @user.username %></p>
+
+
+<h3>Club memberships</h3>
+<ul>
+<% @user.beer_clubs.each do |bc|%>
+<li><%= "#{bc.name}, #{bc.city}" %></li>
+<% end %>
+</ul>
+
 <p><%= "Has made #{@user.ratings.count} #{'rating'.pluralize(@user.ratings.count)}, average rating #{@user.average_rating}"  %></p>
 <p><strong>ratings</strong></p>
 <ul>
