@@ -6,7 +6,7 @@
   <h3>Members</h3>
   <ul>
     <% @members.each do |m|%>
-      <li><%= m.username %></li>
+      <li><%= link_to m.username, user_path(m.id) %></li>
     <% end %>
   </ul>
 </div>

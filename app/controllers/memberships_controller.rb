@@ -12,7 +12,8 @@ class MembershipsController < ApplicationController
 
   # GET /memberships/new
   def new
-    @beer_clubs = BeerClub.all
+    @user = current_user
+    @valid_beer_clubs = BeerClub.all.reject { |e| @user.beer_club_ids.include?(e.id) }
     @membership = Membership.new
   end
 
@@ -25,8 +26,6 @@ class MembershipsController < ApplicationController
     @membership = Membership.new(membership_params)
     @membership.user_id = current_user.id
     @user = current_user
-
-    @beer_clubs = BeerClub.all
 
     respond_to do |format|
       if @membership.save

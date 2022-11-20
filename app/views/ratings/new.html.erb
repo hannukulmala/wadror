@@ -1,12 +1,12 @@
-<h2>Join a club</h2>
+<h2>New rating</h2>
 
-<%= form_for(@membership) do |f| %>
-  <% if @membership.errors.any? %>
+<%= form_for(@rating) do |f| %>
+  <% if @rating.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@membership.errors.count, "error") %> prohibited membership from being saved:</h2>
+      <h2><%= pluralize(@rating.errors.count, "error") %> prohibited rating from being saved:</h2>
 
       <ul>
-      <% @membership.errors.full_messages.each do |msg| %>
+      <% @rating.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
