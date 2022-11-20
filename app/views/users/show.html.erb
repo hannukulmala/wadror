@@ -1,7 +1,19 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @user %>
+<h3>Username:</h3>
+<p><%= @user.username %></p>
+<p><%= "Has made #{@user.ratings.count} #{'rating'.pluralize(@user.ratings.count)}, average rating #{@user.average_rating}"  %></p>
+<p><strong>ratings</strong></p>
+<ul>
+  <% @user.ratings.each do |r| %>
+    <li>
+    <%= "#{(Beer.find_by id: r.beer_id).name}"  %>
+    <%= "#{(Rating.find_by beer_id: r.beer_id).score}"  %>
+    <%= link_to 'Delete', r, data: { turbo_method: :delete } %>
+    </li>
+  <% end %>
 
+</ul>
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>
