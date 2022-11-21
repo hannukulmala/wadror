@@ -4,7 +4,7 @@
  <% @ratings.each do |r| %>
    <li> 
     <%= r %>
-    <%= link_to "#{(User.find_by id: r.user_id).username}", user_path(current_user.id) %>
+    <%= link_to "#{r.user.username}", user_path(r.user.id) %>
    </li>
  <% end %>
 </ul>

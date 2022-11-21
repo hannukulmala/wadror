@@ -17,7 +17,7 @@
   <% @user.ratings.each do |r| %>
     <li>
     <%= "#{(Beer.find_by id: r.beer_id).name}"  %>
-    <%= "#{(Rating.find_by beer_id: r.beer_id).score}"  %>
+    <%= "#{r.score}"  %>
     <% if @user == current_user %>
       <%= link_to 'Delete', r, data: { turbo_method: :delete } %>
     <% end %>
