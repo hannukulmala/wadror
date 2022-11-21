@@ -18,14 +18,20 @@
     <li>
     <%= "#{(Beer.find_by id: r.beer_id).name}"  %>
     <%= "#{(Rating.find_by beer_id: r.beer_id).score}"  %>
-    <%= link_to 'Delete', r, data: { turbo_method: :delete } %>
+    <% if @user == current_user %>
+      <%= link_to 'Delete', r, data: { turbo_method: :delete } %>
+    <% end %>
     </li>
   <% end %>
 
 </ul>
 <div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <% if @user == current_user %>
+    <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <% end %>
   <%= link_to "Back to users", users_path %>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
+  <% if @user == current_user %>
+    <%= button_to "Destroy this user", @user, method: :delete %>
+  <% end %>
 </div>
