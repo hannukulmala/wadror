@@ -5,6 +5,9 @@
 
 <p><%= "Has made #{@user.ratings.count} #{'rating'.pluralize(@user.ratings.count)}, average rating #{@user.average_rating}"  %></p>
 
+<p><strong>Favorite style:</strong>
+<%= @user.favorite_style %></p>
+
 <p><strong>Member of</strong></p>
 <ul>
 <% @user.beer_clubs.each do |bc|%>
