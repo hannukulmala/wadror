@@ -8,6 +8,9 @@
 <p><strong>Favorite style:</strong>
 <%= @user.favorite_style %></p>
 
+<p><strong>Favorite brewery:</strong>
+<%= @user.favorite_brewery.name if not @user.favorite_brewery.nil? %></p>
+
 <p><strong>Member of</strong></p>
 <ul>
 <% @user.beer_clubs.each do |bc|%>

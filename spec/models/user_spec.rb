@@ -89,17 +89,43 @@ RSpec.describe User, type: :model do
     end
 
     it "is the one with highest average rating if several rated" do
-      #create_beers_with_many_ratings_and_style({ user: user }, *(20..25), "Lager" )
-      #create_beers_with_many_ratings_and_style({ user: user }, *(30..35), "IPA" )
-      #create_beers_with_many_ratings_and_style({ user: user }, *(35..40), "Weizen" )
-      #best = create_beer_with_rating_and_style({ user: user }, 47, "Weizen" ) 
-      #
       create_beers_with_many_ratings({ user: user, style: 'Lager' }, *(20..25) )
       create_beers_with_many_ratings({ user: user, style: 'IPA' }, *(30..35) )
       create_beers_with_many_ratings({ user: user, style: 'Weizen' }, *(35..40) )
       best = create_beer_with_rating({ user: user, style: 'Weizen' }, 47 ) 
 
       expect(user.favorite_style).to eq(best.style)
+    end
+  end
+
+  describe "favorite brewery" do
+    let(:user){ FactoryBot.create(:user) }
+
+    it "has method for determining one" do
+      expect(user).to respond_to(:favorite_brewery)
+    end
+
+    it "without ratings does not have one" do
+      expect(user.favorite_brewery).to eq(nil)
+    end
+
+    it "is the only rated if only one rating" do
+      beer = FactoryBot.create(:beer)
+      rating = FactoryBot.create(:rating, score: 20, beer: beer, user: user)
+
+      expect(user.favorite_brewery.name).to eq(beer.brewery.name)
+    end
+
+    it "is the one with highest average rating if several rated" do
+      create_beers_with_many_ratings_and_brewery({ user: user, brewery: 'Koff' }, *(20..25) )
+      create_beers_with_many_ratings_and_brewery({ user: user, brewery: 'BrewDog' }, *(30..35) )
+      create_beers_with_many_ratings_and_brewery({ user: user, brewery: 'Malmgard' }, *(35..40) )
+      best = create_beer_with_rating_and_brewery({ user: user, brewery: 'Malmgard' }, 40 ) 
+
+      #puts user.ratings.map { |e| Beer.find_by id: e.beer_id }.map {|e| (Brewery.find_by id: e.brewery_id).name}.uniq
+
+
+      expect(user.favorite_brewery.name).to eq(best.brewery.name)
     end
   end
 
@@ -116,6 +142,20 @@ RSpec.describe User, type: :model do
   def create_beers_with_many_ratings(object, *scores)
     scores.each do |score|
       create_beer_with_rating(object, score)
+    end
+  end
+
+  def create_beer_with_rating_and_brewery(object, score)
+    #brewery = Brewery.new name: object[:brewery], year: 2000
+    brewery = FactoryBot.create(:brewery, name: object[:brewery] )
+    beer = FactoryBot.create(:beer, brewery: brewery)
+    FactoryBot.create(:rating, beer: beer, score: score, user: object[:user] )
+    beer
+  end
+
+  def create_beers_with_many_ratings_and_brewery(object, *scores)
+    scores.each do |score|
+      create_beer_with_rating_and_brewery(object, score)
     end
   end
 end
