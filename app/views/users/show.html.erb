@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
-<h3>Username:</h3>
-<p><%= @user.username %></p>
+<p><strong>Username:</strong>
+<%= @user.username %></p>
 
 <p><%= "Has made #{@user.ratings.count} #{'rating'.pluralize(@user.ratings.count)}, average rating #{@user.average_rating}"  %></p>
 
