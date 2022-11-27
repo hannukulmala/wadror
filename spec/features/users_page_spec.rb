@@ -3,9 +3,12 @@ require 'rails_helper'
 include Helpers
 
 describe "User" do
-  before :each do
-    FactoryBot.create :user
-  end
+  #before :each do
+  let!(:user){FactoryBot.create :user}
+  let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
+  let!(:beer1) { FactoryBot.create :beer, name: "iso 3", brewery:brewery }
+  let!(:beer2) { FactoryBot.create :beer, name: "Karhu", brewery:brewery }
+  #end
 
   describe "who has signed up" do
     it "can signin with right credentials" do
@@ -30,5 +33,22 @@ describe "User" do
         click_button('Create User')
       }.to change{User.count}.by(1)
     end
+  end
+  it "page shows user's favorite style" do
+    rating1 = FactoryBot.create(:rating, user: user)
+    rating2 = FactoryBot.create(:rating, user: user, score: 20)
+    rating3 = FactoryBot.create(:rating, user: user, score: 30)
+    
+    visit user_path(user)
+    expect(page).to have_content "Favorite style: #{user.favorite_style}"
+  end
+
+  it "page shows user's favorite brewery" do
+    rating1 = FactoryBot.create(:rating, user: user)
+    rating2 = FactoryBot.create(:rating, user: user, score: 20)
+    rating3 = FactoryBot.create(:rating, user: user, score: 30)
+    
+    visit user_path(user)
+    expect(page).to have_content "Favorite brewery: #{user.favorite_brewery.name}"
   end
 end
