@@ -4,8 +4,10 @@
 
 <div>
   <p><%= @brewery.print_rating %></p>
-  <%= link_to "Edit this brewery", edit_brewery_path(@brewery) %> |
-  <%= link_to "Back to breweries", breweries_path %>
+  <% if current_user %>
+    <%= link_to "Edit this brewery", edit_brewery_path(@brewery) %> | 
+    <%= button_to "Destroy this brewery", @brewery, method: :delete %>
+  <% end %>
 
-  <%= button_to "Destroy this brewery", @brewery, method: :delete %>
+    <%= link_to "Back to breweries", breweries_path %>
 </div>

@@ -184,9 +184,13 @@
           1,
           null,
           1,
-          123,
+          132,
           null,
-          94,
+          99,
+          null,
+          null,
+          1,
+          4,
           null,
           null
         ]
@@ -308,6 +312,7 @@
       },
       "/home/hanski/ratebeer/app/controllers/beers_controller.rb": {
         "lines": [
+          1,
           1,
           1,
           1,
@@ -461,12 +466,6 @@
           0,
           null,
           null,
-          1,
-          0,
-          0,
-          0,
-          null,
-          null,
           null
         ]
       },
@@ -524,6 +523,7 @@
       },
       "/home/hanski/ratebeer/app/controllers/beer_clubs_controller.rb": {
         "lines": [
+          0,
           0,
           0,
           null,
@@ -705,6 +705,6 @@
         }
       }
     },
-    "timestamp": 1669561351
+    "timestamp": 1669569057
   }
 }

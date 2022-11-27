@@ -10,9 +10,10 @@
   <% end %>
   <br>
   
+  <% if current_user %>
+    <%= link_to "Edit this beer", edit_beer_path(@beer) %> |
+    <%= button_to "Destroy this beer", @beer, method: :delete %>
+  <% end %>
 
-  <%= link_to "Edit this beer", edit_beer_path(@beer) %> |
-  <%= link_to "Back to beers", beers_path %>
-
-  <%= button_to "Destroy this beer", @beer, method: :delete %>
+    <%= link_to "Back to beers", beers_path %>
 </div>

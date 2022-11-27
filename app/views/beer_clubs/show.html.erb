@@ -12,8 +12,10 @@
 </div>
 
 <div>
-  <%= link_to "Edit this beer club", edit_beer_club_path(@beer_club) %> |
-  <%= link_to "Back to beer clubs", beer_clubs_path %>
+  <% if current_user %>
+    <%= link_to "Edit this beer club", edit_beer_club_path(@beer_club) %> |
+    <%= button_to "Destroy this beer club", @beer_club, method: :delete %>
+  <% end %>
 
-  <%= button_to "Destroy this beer club", @beer_club, method: :delete %>
+    <%= link_to "Back to beer clubs", beer_clubs_path %>
 </div>
