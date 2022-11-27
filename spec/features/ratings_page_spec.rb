@@ -38,4 +38,16 @@ describe "Rating" do
     end
 
   end
+
+  it "user page shows only ratings for that user" do
+    rating1 = FactoryBot.create(:rating, user: user)
+    rating2 = FactoryBot.create(:rating, user: user, score: 20)
+    rating3 = FactoryBot.create(:rating, user: user, score: 30)
+
+    visit user_path(user)
+    user.ratings.each do |e|
+      expect(page).to have_content e.to_s
+    end
+    expect(page).to have_selector('ul li', :count => user.ratings.count)
+  end
 end
