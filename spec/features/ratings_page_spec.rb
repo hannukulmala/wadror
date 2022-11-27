@@ -50,4 +50,17 @@ describe "Rating" do
     end
     expect(page).to have_selector('ul li', :count => user.ratings.count)
   end
+
+  it "user can delete ratings from user page" do
+    rating1 = FactoryBot.create(:rating, user: user)
+    rating2 = FactoryBot.create(:rating, user: user, score: 20)
+    rating3 = FactoryBot.create(:rating, user: user, score: 30)
+
+    visit user_path(user)
+    expect{
+      first(:link, 'Delete').click
+      first(:link, 'Delete').click
+    }.to change{Rating.count}.from(3).to(1)
+
+  end
 end

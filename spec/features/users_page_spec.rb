@@ -18,7 +18,7 @@ describe "User" do
       sign_in(username: "Pekka", password: "wrong")
 
       expect(current_path).to eq(signin_path)
-      expect(page).to have_content "Name can't be blank"
+      expect(page).to have_content 'Username and/or password mismatch'
     end
     it "when signed up with good credentials, is added to the system" do
       visit signup_path
