@@ -23,10 +23,9 @@ class MembershipsController < ApplicationController
 
   # POST /memberships or /memberships.json
   def create
+    @user = current_user
     @membership = Membership.new(membership_params)
     @membership.user_id = current_user.id
-    @user = current_user
-
     respond_to do |format|
       if @membership.save
         format.html { redirect_to user_path(@user), notice: "Membership was successfully created." }
@@ -72,4 +71,6 @@ class MembershipsController < ApplicationController
   def membership_params
     params.require(:membership).permit(:beer_club_id, :user_id)
   end
+
+  private :membership_params
 end

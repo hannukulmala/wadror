@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :memberships
+  resource :membership
   resources :beer_clubs
   resources :users
   resources :beers
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
 
   #get 'places', to: 'places#index'
   post 'places', to: 'places#search'
+  post 'memberships', to: 'memberships#create'
 
   delete 'signout', to: 'sessions#destroy'
 end
