@@ -73,6 +73,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'launchy'
   gem 'simplecov', require: false
+  gem 'webmock'
 end
 
 group :development, :test do
