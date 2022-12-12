@@ -1,0 +1,7 @@
+<% place = Rails.cache.read(session[:last_city]).select {|e| e.id == params[:id]}  %>
+<h3><%= place.map(&:name)[0] %></h3>
+<p><%= place.map(&:status)[0] %></p>
+<p><%= place.map(&:street)[0] %></p>
+<p><%= place.map(&:zip)[0] %>
+<%= place.map(&:city)[0] %>
+</p>
