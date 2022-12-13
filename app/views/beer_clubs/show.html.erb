@@ -12,7 +12,7 @@
 </div>
 
 <div>
-  <% if current_user %>
+  <% if current_user && current_user.beer_clubs.map(&:id).exclude?(@beer_club.id) %>
     <%= form_with(model: @membership) do |form| %>
       <%= form.hidden_field :beer_club_id, value: @beer_club.id %>
       <%= form.hidden_field :user_id, value: current_user.id %>
