@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   #get 'places', to: 'places#index'
   post 'places', to: 'places#search'
   post 'memberships', to: 'memberships#create'
+  delete 'memberships', to: 'memberships#destroy'
 
   delete 'signout', to: 'sessions#destroy'
 end

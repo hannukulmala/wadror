@@ -52,10 +52,15 @@ class MembershipsController < ApplicationController
 
   # DELETE /memberships/1 or /memberships/1.json
   def destroy
+    @user = current_user
+    deleted_beer_club_id = (Membership.find_by id: params[:id].to_i).beer_club_id
+    deleted_beer_club_name = (BeerClub.find_by id: deleted_beer_club_id).name
+
+    # binding.pry
     @membership.destroy
 
     respond_to do |format|
-      format.html { redirect_to memberships_url, notice: "Membership was successfully destroyed." }
+      format.html { redirect_to user_path(@user), notice: "Membership in #{deleted_beer_club_name} has ended." }
       format.json { head :no_content }
     end
   end

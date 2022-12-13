@@ -11,6 +11,7 @@ class BeerClubsController < ApplicationController
   def show
     @members = @beer_club.users
     @membership = Membership.new
+    @current_membership = Membership.all.select { |e| e.user_id == current_user.id && e.beer_club_id == params[:id].to_i }
   end
 
   # GET /beer_clubs/new
