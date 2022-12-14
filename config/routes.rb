@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :beer_clubs
   resources :users
   resources :beers
+  resources :styles
   resources :breweries
   resources :ratings, only: [:index, :new, :create, :destroy]
   resource :session, only: [:new, :create, :destroy]
