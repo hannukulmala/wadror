@@ -3,12 +3,10 @@ require 'rails_helper'
 include Helpers
 
 describe "User" do
-  #before :each do
   let!(:user){FactoryBot.create :user}
   let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
   let!(:beer1) { FactoryBot.create :beer, name: "iso 3", brewery:brewery }
   let!(:beer2) { FactoryBot.create :beer, name: "Karhu", brewery:brewery }
-  #end
 
   describe "who has signed up" do
     it "can signin with right credentials" do

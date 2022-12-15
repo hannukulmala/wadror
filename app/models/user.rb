@@ -20,7 +20,7 @@ class User < ApplicationRecord
   def favorite_style
     return nil if ratings.empty?
 
-    ratings.group_by { |e| e.beer.style }.map { |k, v| [v.map(&:score).reduce(:+) / v.count.to_f, k.itself] }.max[1]
+    ratings.group_by { |e| e.beer.style.name }.map { |k, v| [v.map(&:score).reduce(:+) / v.count.to_f, k.itself] }.max[1]
   end
 
   def favorite_brewery

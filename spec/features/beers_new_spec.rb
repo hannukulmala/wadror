@@ -4,6 +4,7 @@ include Helpers
 
 describe "New beer" do
   let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
+  let!(:style) { FactoryBot.create :style, name: "IPA" }
   let!(:user) { FactoryBot.create :user }
 
   before :each do
@@ -13,7 +14,7 @@ describe "New beer" do
   it "is added when given non-empty name" do
     visit new_beer_path
     fill_in('beer[name]', with: 'a')
-    select('IPA', from: 'beer[style]')
+    select(style.name, from: 'beer[style_id]')
     select(brewery.name, from: 'beer[brewery_id]')
 
     expect{
@@ -24,7 +25,7 @@ describe "New beer" do
   it "is not added with an empty name and error message is shown" do
     visit new_beer_path
     fill_in('beer[name]', with: '')
-    select('IPA', from: 'beer[style]')
+    select(style.name, from: 'beer[style_id]')
     select(brewery.name, from: 'beer[brewery_id]')
 
     expect{
