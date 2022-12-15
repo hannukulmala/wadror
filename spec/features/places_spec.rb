@@ -5,6 +5,7 @@ describe "Places" do
     allow(BeermappingApi).to receive(:places_in).with("kumpula").and_return(
       [ Place.new( name: "Oljenkorsi", id: 1 ) ]
     )
+    allow(WeatherApi).to receive(:get_weather).with("kumpula").and_return([-5, "", 3, 'NE'])
 
     visit places_path
     fill_in('city', with: 'kumpula')
@@ -19,6 +20,7 @@ describe "Places" do
         Place.new( name: "Hamppubaari", id: 2 ),
         Place.new( name: "Esso", id: 3 )]
     )
+    allow(WeatherApi).to receive(:get_weather).with("kumpula").and_return([-5, "", 3, 'NE'])
 
     visit places_path
     fill_in('city', with: 'kumpula')
@@ -31,6 +33,7 @@ describe "Places" do
   it "if empty array is returned by the API, error message is shown" do
     searched_place = "kumpula"
     allow(BeermappingApi).to receive(:places_in).with(searched_place).and_return([])
+    allow(WeatherApi).to receive(:get_weather).with("kumpula").and_return([-5, "", 3, 'NE'])
 
     visit places_path
     fill_in('city', with: 'kumpula')

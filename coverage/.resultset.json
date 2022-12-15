@@ -535,6 +535,28 @@
           null
         ]
       },
+      "/home/hanski/ratebeer/lib/weather_api.rb": {
+        "lines": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null
+        ]
+      },
       "/home/hanski/ratebeer/app/controllers/places_controller.rb": {
         "lines": [
           1,
@@ -546,6 +568,7 @@
           3,
           1,
           null,
+          2,
           2,
           2,
           null,
@@ -874,6 +897,6 @@
         }
       }
     },
-    "timestamp": 1671127937
+    "timestamp": 1671135731
   }
 }
