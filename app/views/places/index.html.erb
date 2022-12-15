@@ -8,6 +8,12 @@
 <% end %>
 
 <% if @places %>
+  <strong><p><%= "Current beer weather in #{params[:city].capitalize}" %></p></strong>
+  <p><%= "#{@weather[0]} Celsius" %></p>
+  <%= image_tag("#{@weather[1]}", :alt => "weather #{params[:city]}", :height => '200px') %>
+  <p><strong>Wind: </strong><%= "#{@weather[2]}" %>
+  <strong> Direction: </strong><%= "#{@weather[3]}" %></p>
+
   <table>
     <thead>
       <% Place.rendered_fields.each do |field| %>
