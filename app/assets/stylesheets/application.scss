@@ -26,4 +26,11 @@
   margin-top: 20px;
 }
 
+.no-border {
+  border: 0 !important;
+  padding: 0;
+  background: none;
+  margin: 0;
+}
+
 @import "bootstrap";
