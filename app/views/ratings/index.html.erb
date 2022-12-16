@@ -9,4 +9,4 @@
    </li>
  <% end %>
 </ul>
- <p><%= link_to "Add a new rating", new_rating_path %></p>
+ <p><%= link_to("Add a new rating", new_rating_path) if current_user %></p>
