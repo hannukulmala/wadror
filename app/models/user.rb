@@ -28,4 +28,8 @@ class User < ApplicationRecord
 
     ratings.group_by { |e| e.beer.brewery }.map { |k, v| [v.map(&:score).reduce(:+) / v.count.to_f, k.itself] }.max[1]
   end
+
+  def self.top(count)
+    User.all.sort_by{ |b| -b.ratings.count }.first(count)
+  end
 end

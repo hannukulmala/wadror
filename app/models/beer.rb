@@ -19,4 +19,8 @@ class Beer < ApplicationRecord
   def show_style
     style.name
   end
+
+  def self.top(count)
+    Beer.all.sort_by{ |b| -b.average_rating }.first(count)
+  end
 end

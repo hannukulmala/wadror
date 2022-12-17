@@ -9,6 +9,9 @@ class Brewery < ApplicationRecord
   validates :year, comparison: { greater_than_or_equal_to: 1040 }
   validate :year_not_greater_than_current_year
 
+  scope :active, -> { where active: true }
+  scope :retired, -> { where active: [nil, false] }
+
   def year_not_greater_than_current_year
     errors.add(:year, "cannot be greater than current year") if year > Date.current.year
   end
@@ -30,5 +33,9 @@ class Brewery < ApplicationRecord
   def restart
     self.year = 2022
     puts "changed year to #{year}"
+  end
+
+  def self.top(count)
+    Brewery.all.sort_by{ |b| -b.average_rating }.first(count)
   end
 end

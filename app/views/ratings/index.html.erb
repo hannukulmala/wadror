@@ -1,12 +1,47 @@
-<h2>List of ratings</h2>
+<h2>Ratings</h2>
+<div class="row">
+  <% [@top_beers, @top_breweries, @top_styles].each do |item| %>
+    <% current_class = item[0].class.name %>
+    <% current_class_plural = item[0].class.name.pluralize(2) %>
+  <div class="table-responsive col-xl-4">
+      <div class="row">
+        <div class="col">
+          <h3>Best <%= current_class_plural.downcase %></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <strong><p><%= current_class %></p></strong>
+        </div>
+        <div class="col">
+          <strong><p>Average</p></strong>
+        </div>
+      </div>
+      <% item.each do |b| %>
+        <div class="row">
+          <div class="col">
+            <p><%= b.name %></p>
+          </div>
+          <div class="col">
+            <p><%= b.average_rating %></p>
+          </div>
+        </div>
+      <% end %>
+  </div>
+  <% end %>
+</div>
 
-<p><strong><%= "Number of ratings: #{Rating.count}" %></strong></p>
-<ul>
- <% @ratings.each do |r| %>
-   <li> 
-    <%= r %>
-    <%= link_to "#{r.user.username}", user_path(r.user.id) %>
-   </li>
- <% end %>
-</ul>
+<h3>Most active users</h3>
+<% @top_users.each_with_index do |user, index| %>
+  <div>
+    <p><%= "#{index+1}. #{user.username} #{user.ratings.count} #{'rating'.pluralize(user.ratings.count)}" %></p>
+  </div>
+<% end %>
+
+<h3>Recent ratings</h3>
+<% @recent_ratings.each do |rating| %>
+  <ul>
+    <li><%= "#{rating} #{rating.created_at.strftime("%Y-%m-%d %k:%M:%S")}" %></li>
+  </ul>
+<% end %>
  <p><%= link_to("Add a new rating", new_rating_path) if current_user %></p>
