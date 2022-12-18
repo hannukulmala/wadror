@@ -38,4 +38,5 @@ class Brewery < ApplicationRecord
   def self.top(count)
     Brewery.all.sort_by{ |b| -b.average_rating }.first(count)
   end
+
 end
