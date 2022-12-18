@@ -2,7 +2,7 @@
   <p>
   <strong>Username:</strong>
   <%= user.username %>
-  <% if user.account_closed && current_user.admin%>
+  <% if user.account_closed && !current_user.nil? && current_user.admin%>
     <span class="badge bg-danger">closed</span>
   <% end %>
   </p>

@@ -26,14 +26,15 @@ describe "Rating" do
     expect(beer1.average_rating).to eq(15.0)
   end
 
-  it "list page shows ratings and number of ratings" do
+  it "list page shows recent ratings" do
     rating1 = FactoryBot.create(:rating, user: user)
     rating2 = FactoryBot.create(:rating, user: user, score: 20)
     rating3 = FactoryBot.create(:rating, user: user, score: 30)
-    num_ratings = Rating.count
+    last_five = Rating.all.last(5)
+    num_ratings = last_five.count
     visit ratings_path
-    expect(page).to have_content "Number of ratings: #{num_ratings}"
-    Rating.all.each do |e|
+    expect(page).to have_content "Recent ratings"
+    last_five.each do |e|
       expect(page).to have_content e.to_s
     end
 
@@ -48,7 +49,8 @@ describe "Rating" do
     user.ratings.each do |e|
       expect(page).to have_content e.to_s
     end
-    expect(page).to have_selector('ul li', :count => user.ratings.count)
+    # binding.pry
+    expect(page).to have_selector('ul.ratings li', :count => user.ratings.count)
   end
 
   it "user can delete ratings from user page" do

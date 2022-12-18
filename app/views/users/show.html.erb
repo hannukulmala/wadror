@@ -1,18 +1,18 @@
 <%= render @user %>
 
-<% if current_user.admin %>
+<% if !current_user.nil? && current_user.admin %>
   <%= link_to "change account status", toggle_account_user_path(@user.id), data: {turbo_method: "post"}, class: "btn btn-primary" %>
 <% end %>
 
 <p><strong>Member of</strong></p>
 <ul>
-<% @user.beer_clubs.each do |bc|%>
-<li><%= link_to "#{bc.name}", beer_club_path(bc.id) %></li>
-<% end %>
+  <% @user.beer_clubs.each do |bc|%>
+    <li><%= link_to "#{bc.name}", beer_club_path(bc.id) %></li>
+  <% end %>
 </ul>
 
 <p><strong>ratings</strong></p>
-<ul>
+<ul class="ratings">
   <% @user.ratings.each do |r| %>
     <li>
     <%= "#{(Beer.find_by id: r.beer_id).name}"  %>
