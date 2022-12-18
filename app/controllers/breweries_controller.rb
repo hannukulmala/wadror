@@ -4,11 +4,11 @@ class BreweriesController < ApplicationController
 
   def toggle_activity
     brewery = Brewery.find(params[:id])
-    brewery.update_attribute :active, (not brewery.active)
+    brewery.update_attribute :active, !brewery.active
 
     new_status = brewery.active? ? "active" : "retired"
 
-    redirect_to brewery, notice:"brewery activity status changed to #{new_status}"
+    redirect_to brewery, notice: "brewery activity status changed to #{new_status}"
   end
 
   # GET /breweries or /breweries.json
@@ -80,6 +80,4 @@ class BreweriesController < ApplicationController
   def brewery_params
     params.require(:brewery).permit(:name, :year, :active)
   end
-
-
 end

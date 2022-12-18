@@ -1,6 +1,15 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
+  def toggle_account
+    @user = User.find(params[:id])
+    @user.update_attribute :account_closed, !@user.account_closed
+
+    new_status = @user.account_closed? ? "closed" : "open"
+
+    redirect_to @user, notice: "user activity status changed to #{new_status}"
+  end
+
   # GET /users or /users.json
   def index
     @users = User.all
