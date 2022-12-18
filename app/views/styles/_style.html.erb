@@ -1,4 +1,10 @@
 <div id="<%= dom_id style %>">
-  <strong><p>Name: </strong><%= style.name %></p>
-  <strong><p>Description: </strong><%= style.description %></p>
-</div>
+<h2>
+  <%= style.name %>
+</h2>
+
+<quote>
+  <%= style.description %>
+</quote>
+
+<%= edit_and_destroy_buttons(style) %>
