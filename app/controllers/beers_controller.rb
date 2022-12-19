@@ -3,9 +3,17 @@ class BeersController < ApplicationController
   before_action :set_breweries_and_styles_for_template, only: [:new, :edit, :create]
   before_action :ensure_that_signed_in, except: [:index, :show]
 
-  # GET /beers or /beers.json
   def index
     @beers = Beer.all
+
+    order = params[:order] || 'name'
+
+    @beers = case order
+             when "name" then @beers.sort_by(&:name)
+             when "brewery" then @beers.sort_by { |b| b.brewery.name }
+             when "style" then @beers.sort_by { |b| b.style.name }
+             when "rating" then @beers.sort_by(&:average_rating).reverse
+             end
   end
 
   # GET /beers/1 or /beers/1.json
