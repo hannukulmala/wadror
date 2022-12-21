@@ -32,7 +32,7 @@ describe "Beerlist page" do
     expect(page).to have_content "Nikolai"
   end
 
-  it "shows beers in alphabetical order", js:true  do
+  it "shows beers in alphabetical order by name", js:true  do
     visit beerlist_path
     beers = []
     result = page.all('.tablerow')
@@ -42,4 +42,29 @@ describe "Beerlist page" do
     sorted_beers = beers.sort
     expect(beers == sorted_beers).to equal(true)
   end
+
+  it "when style is clicked, shows beers in alphabetical order by style", js:true  do
+    visit beerlist_path
+    sleep 1
+    page.find('#style').click
+    styles = []
+    page.all('.tablerow td:nth-child(2)').each do |e|
+      styles.append(e.text)
+    end
+    sorted_styles = styles.sort
+    expect(styles == sorted_styles).to equal(true)
+  end
+
+  it "when brewery is clicked, shows beers in alphabetical order by brewery", js:true  do
+    visit beerlist_path
+    sleep 1
+    page.find('#brewery').click
+    breweries = []
+    page.all('.tablerow td:nth-child(3)').each do |e|
+      breweries.append(e.text)
+    end
+    sorted_brewery = breweries.sort
+    expect(breweries == sorted_brewery).to equal(true)
+  end
+
 end
