@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   root 'breweries#index'
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
+  get 'beerlist', to: 'beers#list'
+  get 'brewerylist', to: 'breweries#list'
 
   post 'places', to: 'places#search'
   post 'memberships', to: 'memberships#create'

@@ -1,6 +1,6 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: %i[show edit update destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :list]
 
   def toggle_activity
     brewery = Brewery.find(params[:id])
@@ -13,6 +13,7 @@ class BreweriesController < ApplicationController
 
   # GET /breweries or /breweries.json
   def index
+    @breweries = Brewery.all
     @active_breweries = Brewery.all.active
     @retired_breweries = Brewery.all.retired
     @top_breweries = Brewery.top 3
