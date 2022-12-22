@@ -1,4 +1,6 @@
 class RatingsController < ApplicationController
+  before_action :expire_brewerylist_cache, only: [:update, :create, :delete]
+
   def index
     @ratings = Rating.all
     @top_users = User.top 3
