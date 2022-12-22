@@ -4,7 +4,7 @@ class BeersController < ApplicationController
   before_action :ensure_that_signed_in, except: [:index, :show, :list]
 
   def index
-    @beers = Beer.all
+    @beers = Beer.includes(:brewery, :style, :ratings).all
 
     order = params[:order] || 'name'
 

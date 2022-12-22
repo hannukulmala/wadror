@@ -45,6 +45,7 @@ gem "bootsnap", require: false
 gem 'bootstrap', '~> 5.2.0'
 gem 'jquery-rails'
 gem 'mini_racer'
+gem 'rack-mini-profiler'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
