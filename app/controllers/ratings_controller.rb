@@ -2,12 +2,31 @@ class RatingsController < ApplicationController
   before_action :expire_brewerylist_cache, only: [:update, :create, :delete]
 
   def index
-    @ratings = Rating.all
-    @top_users = User.top 3
-    @top_beers = Beer.top 3
-    @top_breweries = Brewery.top 3
-    @top_styles = Style.top 3
-    @recent_ratings = Rating.recent
+    if !Rails.cache.exist?("users top 3")
+      Rails.cache.write("users top 3", User.top(3), expires_in: 1.minutes)
+    end
+
+    if !Rails.cache.exist?("beers top 3")
+      Rails.cache.write("beers top 3", Beer.top(3), expires_in: 1.minutes)
+    end
+
+    if !Rails.cache.exist?("styles top 3")
+      Rails.cache.write("styles top 3", Style.top(3), expires_in: 1.minutes)
+    end
+
+    if !Rails.cache.exist?("breweries top 3")
+      Rails.cache.write("breweries top 3", Brewery.top(3), expires_in: 1.minutes)
+    end
+
+    if !Rails.cache.exist?("recent ratings")
+      Rails.cache.write("recent ratings", Rating.recent, expires_in: 1.minutes)
+    end
+
+    @recent_ratings = Rails.cache.read("recent ratings")
+    @top_breweries = Rails.cache.read("breweries top 3")
+    @top_styles = Rails.cache.read("styles top 3")
+    @top_beers = Rails.cache.read("beers top 3")
+    @top_users = Rails.cache.read("users top 3")
   end
 
   def new

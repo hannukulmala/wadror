@@ -1,6 +1,7 @@
 <h2>Ratings</h2>
 <div class="row">
   <% [@top_beers, @top_breweries, @top_styles].each do |item| %>
+    <%# binding.pry %>
     <% current_class = item[0].class.name %>
     <% current_class_plural = item[0].class.name.pluralize(2) %>
   <div class="table-responsive col-xl-4">

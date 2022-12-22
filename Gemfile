@@ -46,6 +46,7 @@ gem 'bootstrap', '~> 5.2.0'
 gem 'jquery-rails'
 gem 'mini_racer'
 gem 'rack-mini-profiler'
+gem 'sucker_punch', '~> 3.0'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
