@@ -25,7 +25,7 @@ class Brewery < ApplicationRecord
   def print_rating
     res = "Brewery has #{ratings.count} #{'rating'.pluralize(ratings.count)}"
     if ratings.count > 0
-      res += " with an average of #{average_rating}"
+      res += " with an average of #{average_rating.round(1)}"
     end
     res
   end

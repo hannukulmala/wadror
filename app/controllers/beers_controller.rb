@@ -34,7 +34,7 @@ class BeersController < ApplicationController
 
   # POST /beers or /beers.json
   def create
-    ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
+    %w(beerlist-name beerlist-brewery beerlist-style).each{ |f| expire_fragment(f) }
     @beer = Beer.new(beer_params)
     # binding.pry
 
@@ -51,7 +51,7 @@ class BeersController < ApplicationController
 
   # PATCH/PUT /beers/1 or /beers/1.json
   def update
-    ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
+    %w(beerlist-name beerlist-brewery beerlist-style).each{ |f| expire_fragment(f) }
     @beer = Beer.new(beer_params)
     respond_to do |format|
       if @beer.update(beer_params)
@@ -66,7 +66,7 @@ class BeersController < ApplicationController
 
   # DELETE /beers/1 or /beers/1.json
   def destroy
-    ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
+    %w(beerlist-name beerlist-brewery beerlist-style).each{ |f| expire_fragment(f) }
     @beer.destroy
 
     respond_to do |format|

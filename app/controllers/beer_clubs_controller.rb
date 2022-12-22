@@ -8,19 +8,19 @@ class BeerClubsController < ApplicationController
     order = params[:order] || 'name'
 
     @beer_clubs = case order
-             when "name" then @beer_clubs.sort_by(&:name)
-             when "founded" then @beer_clubs.sort_by { |b| b.founded }
-             when "city" then @beer_clubs.sort_by { |b| b.city }
-             end
+                  when "name" then @beer_clubs.sort_by(&:name)
+                  when "founded" then @beer_clubs.sort_by(&:founded)
+                  when "city" then @beer_clubs.sort_by(&:city)
+                  end
   end
 
   # GET /beer_clubs/1 or /beer_clubs/1.json
   def show
     @members = @beer_club.users
     @membership = Membership.new
-    if current_user
-      @current_membership = Membership.all.select { |e| e.user_id == current_user.id && e.beer_club_id == params[:id].to_i }
-    end
+    return unless current_user
+
+    @current_membership = Membership.all.select { |e| e.user_id == current_user.id && e.beer_club_id == params[:id].to_i }
   end
 
   # GET /beer_clubs/new
