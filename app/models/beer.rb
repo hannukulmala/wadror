@@ -1,5 +1,7 @@
 class Beer < ApplicationRecord
   include RatingAverage
+  extend Top
+
   belongs_to :brewery, touch: true
   belongs_to :style
   has_many :ratings, dependent: :destroy
@@ -20,7 +22,4 @@ class Beer < ApplicationRecord
     style.name
   end
 
-  def self.top(count)
-    Beer.all.sort_by{ |b| -b.average_rating }.first(count)
-  end
 end
