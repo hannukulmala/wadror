@@ -1,7 +1,6 @@
 <h2>Ratings</h2>
 <div class="row">
   <% [@top_beers, @top_breweries, @top_styles].each do |item| %>
-    <%# binding.pry %>
     <% current_class = item[0].class.name %>
     <% current_class_plural = item[0].class.name.pluralize(2) %>
   <div class="table-responsive col-xl-4">
@@ -32,14 +31,16 @@
   <% end %>
 </div>
 
-<h3>Most active users</h3>
-<% @top_users.each_with_index do |user, index| %>
+<h4>Most active users</h4>
+<ol>
+<% @top_users.each do |user| %>
   <div>
-    <p><%= "#{index+1}. #{user.username} #{user.ratings.count} #{'rating'.pluralize(user.ratings.count)}" %></p>
+    <li><%= "#{user.username} #{user.ratings.count} #{'rating'.pluralize(user.ratings.count)}" %></li>
   </div>
 <% end %>
+</ol>
 
-<h3>Recent ratings</h3>
+<h4>Recent ratings</h4>
 <% @recent_ratings.each do |rating| %>
   <ul>
     <li><%= "#{rating} #{rating.created_at.strftime("%Y-%m-%d %k:%M:%S")}" %></li>

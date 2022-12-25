@@ -1,33 +1,14 @@
-<%
-=begin 
-%>
 <h1>Users</h1>
 
 <div id="users">
   <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New user", new_user_path %>
-<% 
-=end 
-%>
-
-<h1>Users</h1>
-
-<div id="users">
-  <% @users.each do |user| %>
-    <p>
-      <%= link_to(user.username, user) %>
-      <p>Has made <%= "#{user.ratings.size}"%> ratings, average rating <%= "#{user.average_rating}" %></p>
+    <div class="user_list">
+      <h3 class="h3 d-inline-block"><%= link_to(user.username, user) %></h3>
       <% if user.account_closed? %>
-        <span class="badge text-bg-danger">account closed</span>
+        <span class="account_closed_badge badge text-bg-danger">account closed</span>
       <% end %>
-    </p>
+      <p>Has made <%= "#{user.ratings.size}"%> ratings, average rating <%= "#{user.average_rating.round(1)}" %></p>
+    </div>
   <% end %>
 </div>
 

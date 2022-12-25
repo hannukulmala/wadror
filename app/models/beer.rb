@@ -21,5 +21,4 @@ class Beer < ApplicationRecord
   def show_style
     style.name
   end
-
 end

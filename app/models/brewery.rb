@@ -1,5 +1,5 @@
 class Brewery < ApplicationRecord
-  include  RatingAverage
+  include RatingAverage
   extend Top
 
   has_many :beers, dependent: :destroy
@@ -35,5 +35,4 @@ class Brewery < ApplicationRecord
     self.year = 2022
     puts "changed year to #{year}"
   end
-
 end

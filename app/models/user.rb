@@ -30,7 +30,6 @@ class User < ApplicationRecord
   end
 
   def self.top(count)
-    all.sort_by{ |u| -u.ratings.count}.first(count)
+    all.sort_by{ |u| -u.ratings.count }.first(count)
   end
-
 end
